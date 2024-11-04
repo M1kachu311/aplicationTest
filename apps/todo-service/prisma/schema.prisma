@@ -1,5 +1,5 @@
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DB_URL")
 }
 
@@ -10,7 +10,7 @@ generator client {
 model Item {
   createdAt   DateTime @default(now())
   description String?
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(cuid())
   name        String?
   updatedAt   DateTime @updatedAt
 }
