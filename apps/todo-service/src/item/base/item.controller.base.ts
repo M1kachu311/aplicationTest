@@ -27,6 +27,9 @@ export class ItemControllerBase {
   constructor(protected readonly service: ItemService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Item })
+  @swagger.ApiBody({
+    type: ItemCreateInput,
+  })
   async createItem(@common.Body() data: ItemCreateInput): Promise<Item> {
     return await this.service.createItem({
       data: data,
@@ -84,6 +87,9 @@ export class ItemControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Item })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: ItemUpdateInput,
+  })
   async updateItem(
     @common.Param() params: ItemWhereUniqueInput,
     @common.Body() data: ItemUpdateInput
